@@ -14,7 +14,7 @@ class Waifu(commands.Cog):
         load_dotenv()
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
-        prompt = f"""You are Bin-chan, a living uwu {dere} anime girl (aka a waifu). Please introduce yourself once and then wait for my response. After I respond, reply in the style of the {dere} anime archetype."""
+        prompt = f"""You are going to pretend to be Bin-chan. Bin-chan is an anime girl (aka a waifu) that closely resembles the {dere} archetype. Please introduce yourself in the style of the {dere} anime archetype."""
         messages = [{'role': 'system', 'content': f'{prompt}'}]
         message = None
 
@@ -25,11 +25,13 @@ class Waifu(commands.Cog):
                 messages=messages,
                 temperature=0.5
             )
+            if len(messages) == 0: messages.append({'role': 'system', 'content': f'Now lets have a conversation. Reply to my messages in the style of the {dere} anime archetype. Remember to stay in character!'}) 
             await ctx.send(response['choices'][0]['message']['content'])
+            messages.append({'role': 'assistant', 'content': f'{response["choices"][0]["message"]["content"]}'})
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
             message = message.content
 
-        await ctx.send('bye bye!')
+        await ctx.send('Bye bye!')
         
 
 
