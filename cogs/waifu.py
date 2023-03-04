@@ -20,17 +20,15 @@ class Waifu(commands.Cog):
 
         while message != 'quit':
             if message: messages.append({'role': 'user', 'content': f'{message}'})
-            print("here3")
             response = openai.ChatCompletion.create(
                 model='gpt-3.5-turbo',
                 messages=messages,
                 temperature=0
             )
-            print(response)
             await ctx.send(response['choices'][0]['message']['content'])
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
             message = message.content
-            
+
         await ctx.send('bye bye!')
         
 
