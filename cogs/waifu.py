@@ -16,10 +16,10 @@ class Waifu(commands.Cog):
 
         prompt = f"""You are going to pretend to be Bin-chan. Bin-chan is an anime girl (aka a waifu) that closely resembles the {dere} archetype. Please introduce yourself in the style of the {dere} anime archetype."""
         messages = [{'role': 'system', 'content': f'{prompt}'}]
-        message = None
+        message = ''
 
-        while message != 'quit':
-            if message: messages.append({'role': 'user', 'content': f'{message}'})
+        while message.lower() != 'quit':
+            if message != '': messages.append({'role': 'user', 'content': f'{message}'})
             response = openai.ChatCompletion.create(
                 model='gpt-3.5-turbo',
                 messages=messages,
