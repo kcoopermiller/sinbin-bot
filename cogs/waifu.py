@@ -15,7 +15,7 @@ class Waifu(commands.Cog):
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
         if flag == '-d': prompt = f"""You are going to pretend to be Bin-chan. Bin-chan is an anime girl (aka a waifu) that closely resembles the {args} archetype. Please introduce yourself in the style of the {args} anime archetype."""
-        if flag == '-c': prompt = f"""You are going to pretend to be an anime girl version of {args}. If {args} is already an anime character then just act similarly to how they do. If they are not an anime charcter, then add some traits that you'd find in an anime girl to your impersonation of {args} (your goal is to be a waifu version of {args}). Now, please introduce yourself."""
+        elif flag == '-c': prompt = f"""You are going to pretend to be an anime girl version of {args}. If {args} is already an anime character then just act similarly to how they do. If they are not an anime charcter, then add some traits that you'd find in an anime girl to your impersonation of {args} (your goal is to be a waifu version of {args}). Now, please introduce yourself."""
         else: 
             await ctx.send('Please specify a flag\n.chat -d [dere]\n.chat -c [character]')
             return
